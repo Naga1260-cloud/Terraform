@@ -17,32 +17,28 @@ create ec2-instance through terraform
     1. Create a directory , goto directory
     2. Vi main.tf
     3. Task: create ec2 instance with us-east-1 region
-            1. provider "aws" {
-            2.   region = "us-east-1"
-            3. }
-            4. 
-            5. resource "aws_instance" "example" {
-            6.   ami                    = "ami-091138d0f0d41ff90"
-            7.   instance_type          = "t2.micro"
-            8.   user_data              = <<-EOF
-            9.               #!/bin/bash
-            10.               apt-get update
-            11.               apt-get install -y apache2
-            12.               sed -i -e 's/80/8080/' /etc/apache2/ports.conf
-            13.               echo "Hello World" > /var/www/html/index.html
-            14.               systemctl restart apache2
-            15.               EOF
-            16.   tags = {
-            17.     Name = "terraform-learn-state-ec2"
-            18.   }
-            19. }
-            20. 
-            21. output "public_ip"{
-            22. value = aws_instance.example.public_ip
-            23. }
-    4. Save the file
-    5. Terraform init
-    6. Terraform validate
-    7. Terraform apply
-    8. Check resource is created or not 
-    9. Terraform destroy
+       
+             provider "aws" {
+               region = "us-east-1"
+             }
+        
+             resource "aws_instance" "example" {
+               ami                    = "ami-091138d0f0d41ff90"
+               instance_type          = "t2.micro"
+             
+              tags = {
+                 Name = "terraform-learn-state-ec2"
+               }
+             }
+       
+             output "public_ip"{
+             value = aws_instance.example.public_ip
+             }
+
+       
+    5. Save the file
+    6. Terraform init
+    7. Terraform validate
+    8. Terraform apply
+    9. Check resource is created or not  if created
+    10. Terraform destroy : will destroy the resource
